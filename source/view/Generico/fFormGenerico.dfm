@@ -1,0 +1,31 @@
+object frmGenerico: TfrmGenerico
+  Left = 0
+  Top = 0
+  Caption = 'frmGenerico'
+  ClientHeight = 436
+  ClientWidth = 650
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  KeyPreview = True
+  OldCreateOrder = False
+  OnKeyDown = FormKeyDown
+  OnKeyPress = FormKeyPress
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 650
+    Height = 436
+    Align = alClient
+    TabOrder = 0
+    ExplicitLeft = 256
+    ExplicitTop = 160
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+  end
+end
