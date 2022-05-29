@@ -26,6 +26,14 @@ AS $function$
             RETURN RESULTADO + 1000000000000;
             END
             $function$;
+			
+CREATE SEQUENCE public.seq_id_geral
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START 1
+	CACHE 1
+	NO CYCLE;			
            
 
 CREATE TABLE estado(
@@ -184,7 +192,8 @@ CREATE TABLE folha_cadastral_estado_civil_certidoes(
 	nr_sentenca_autos varchar(100),
 	juizo varchar(100),
 	possui_pacto_antenupcial bool DEFAULT FALSE,
-	uniao_estavel_desde varchar(10), 
+	uniao_estavel_desde varchar(10),
+	dt_atz timestamp(0) NULL DEFAULT now(),	
 	CONSTRAINT pk_folha_cadastral_estado_civil_certidoes PRIMARY KEY (id_geral),
 	CONSTRAINT fk_folha_cadastral_estado_civil_certidoes_folha_cadastral FOREIGN KEY (id_folha_cadastral_estado_civil) REFERENCES folha_cadastral_estado_civil(id_geral) ON DELETE CASCADE
 );
@@ -319,3 +328,28 @@ INSERT
 UPDATE
     ON
     public.folha_cadastral_dados_imovel_documentos_ocupante FOR EACH ROW EXECUTE FUNCTION func_grava_dt_atz();
+	
+	
+ALTER TABLE public.folha_cadastral_estado_civil_certidoes ADD CONSTRAINT folha_cadastral_estado_civil_certidoes_un UNIQUE (id_folha_cadastral_estado_civil,nr_certidao,folhas,livro);	
+
+CREATE TABLE obras (
+	cd_obra int4 NOT NULL,
+	nm_obra varchar(100),
+	dt_atz timestamp,
+	CONSTRAINT pk_obras PRIMARY KEY (cd_obra));
+	
+CREATE TRIGGER trg_obras BEFORE
+INSERT
+    OR
+UPDATE
+    ON
+    public.obras FOR EACH ROW EXECUTE FUNCTION func_grava_dt_atz();
+	
+ALTER TABLE public.folha_cadastral RENAME COLUMN obra TO cd_obra;
+ALTER TABLE public.folha_cadastral ALTER COLUMN cd_obra TYPE int4 USING cd_obra::int4;
+ALTER TABLE public.folha_cadastral ALTER COLUMN cd_obra SET NOT NULL;
+ALTER TABLE public.folha_cadastral ADD CONSTRAINT folha_cadastral_fk FOREIGN KEY (cd_obra) REFERENCES public.obras(cd_obra);
+
+ALTER TABLE public.folha_cadastral_endereco ADD bairro varchar(100) NULL;
+ALTER TABLE folha_cadastral ADD COLUMN orgao_expedidor varchar(10) DEFAULT '';
+ALTER TABLE folha_cadastral ADD COLUMN folha_proprietario Bool;

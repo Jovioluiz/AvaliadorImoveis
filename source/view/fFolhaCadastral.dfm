@@ -1,31 +1,33 @@
-﻿object frmFolhaCadastral: TfrmFolhaCadastral
+object frmFolhaCadastral: TfrmFolhaCadastral
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Folha Cadastral'
-  ClientHeight = 720
-  ClientWidth = 1206
+  ClientHeight = 738
+  ClientWidth = 1195
   Color = clBtnFace
   ParentFont = True
   KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlFundo: TPanel
     Left = 0
     Top = 0
-    Width = 1206
-    Height = 720
+    Width = 1195
+    Height = 738
     Align = alClient
     TabOrder = 0
     object pcFundo: TPageControl
       Left = 1
       Top = 1
-      Width = 1204
-      Height = 718
+      Width = 1193
+      Height = 736
       ActivePage = tbsCabecalho
       Align = alClient
       TabOrder = 0
@@ -40,14 +42,14 @@
         object pnlFundoDadosProp: TPanel
           Left = 0
           Top = 0
-          Width = 1196
-          Height = 690
+          Width = 1185
+          Height = 708
           Align = alClient
           TabOrder = 0
           object Label1: TLabel
             Left = 1
             Top = 1
-            Width = 1194
+            Width = 1183
             Height = 19
             Align = alTop
             Alignment = taCenter
@@ -63,15 +65,14 @@
           object pnlEstadoCivil: TPanel
             Left = 1
             Top = 264
-            Width = 1194
+            Width = 1183
             Height = 170
             Align = alTop
             TabOrder = 0
-            ExplicitTop = 201
             object gbEstadoCivil: TGroupBox
               Left = 1
               Top = 1
-              Width = 1192
+              Width = 1181
               Height = 168
               Align = alClient
               Caption = 'Estado Civil'
@@ -132,6 +133,14 @@
                 Height = 16
                 Caption = 'Estado Civil:'
               end
+              object lblUniaoEstavel: TLabel
+                Left = 8
+                Top = 52
+                Width = 81
+                Height = 16
+                Caption = 'Uni'#227'o Est'#225'vel:'
+                Visible = False
+              end
               object edtNumeroCertidao: TEdit
                 Left = 407
                 Top = 19
@@ -139,7 +148,7 @@
                 Height = 24
                 CharCase = ecUpperCase
                 Enabled = False
-                TabOrder = 0
+                TabOrder = 1
               end
               object edtFolhas: TEdit
                 Left = 601
@@ -148,7 +157,7 @@
                 Height = 24
                 CharCase = ecUpperCase
                 Enabled = False
-                TabOrder = 1
+                TabOrder = 2
               end
               object edtLivro: TEdit
                 Left = 793
@@ -157,7 +166,7 @@
                 Height = 24
                 CharCase = ecUpperCase
                 Enabled = False
-                TabOrder = 2
+                TabOrder = 3
               end
               object edtCartorio: TEdit
                 Left = 984
@@ -166,7 +175,7 @@
                 Height = 24
                 CharCase = ecUpperCase
                 Enabled = False
-                TabOrder = 3
+                TabOrder = 4
               end
               object edtNumeroSentenca: TEdit
                 Left = 448
@@ -175,7 +184,7 @@
                 Height = 24
                 CharCase = ecUpperCase
                 Enabled = False
-                TabOrder = 4
+                TabOrder = 6
               end
               object edtJuizo: TEdit
                 Left = 793
@@ -184,31 +193,16 @@
                 Height = 24
                 CharCase = ecUpperCase
                 Enabled = False
-                TabOrder = 5
-              end
-              object edtData: TDatePicker
-                Left = 984
-                Top = 48
-                Width = 181
-                Height = 25
-                Date = 44693.000000000000000000
-                DateFormat = 'dd/MM/yyyy'
-                Enabled = False
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -16
-                Font.Name = 'Segoe UI'
-                Font.Style = []
-                TabOrder = 6
+                TabOrder = 7
               end
               object gbPacto: TGroupBox
                 Left = 2
                 Top = 85
-                Width = 1188
+                Width = 1177
                 Height = 81
                 Align = alBottom
                 Caption = 'Pacto Antenupcial'
-                TabOrder = 7
+                TabOrder = 8
                 object Label20: TLabel
                   Left = 17
                   Top = 41
@@ -289,19 +283,13 @@
                   Enabled = False
                   TabOrder = 4
                 end
-                object edtDataPacto: TDatePicker
+                object edtDataPacto: TDateTimePicker
                   Left = 982
-                  Top = 36
+                  Top = 40
                   Width = 181
-                  Height = 25
-                  Date = 44693.000000000000000000
-                  DateFormat = 'dd/MM/yyyy'
-                  Enabled = False
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clWindowText
-                  Font.Height = -16
-                  Font.Name = 'Segoe UI'
-                  Font.Style = []
+                  Height = 24
+                  Date = 44707.000000000000000000
+                  Time = 0.872174039352103100
                   TabOrder = 5
                 end
               end
@@ -311,23 +299,41 @@
                 Width = 218
                 Height = 22
                 Style = csOwnerDrawFixed
-                TabOrder = 8
+                TabOrder = 0
                 OnChange = cblistEstadosCivisChange
+              end
+              object edtData: TDateTimePicker
+                Left = 984
+                Top = 49
+                Width = 181
+                Height = 24
+                Date = 44707.000000000000000000
+                Time = 0.871829629628337000
+                TabOrder = 9
+                OnExit = edtDataExit
+              end
+              object edtUniaoEstavel: TEdit
+                Left = 95
+                Top = 49
+                Width = 218
+                Height = 24
+                TabOrder = 5
+                Visible = False
               end
             end
           end
           object pnlDadosProprietario: TPanel
             Left = 1
             Top = 83
-            Width = 1194
+            Width = 1183
             Height = 181
             Align = alTop
             TabOrder = 1
-            ExplicitTop = 20
+            OnExit = pnlDadosProprietarioExit
             object gbDadosProprietario: TGroupBox
               Left = 1
               Top = 1
-              Width = 1192
+              Width = 1181
               Height = 179
               Align = alClient
               Caption = 'Dados Propriet'#225'rio'
@@ -340,7 +346,7 @@
                 Caption = 'Org'#227'o Expedidor:'
               end
               object Label11: TLabel
-                Left = 37
+                Left = 30
                 Top = 115
                 Width = 59
                 Height = 16
@@ -354,8 +360,8 @@
                 Caption = 'Nome M'#227'e:'
               end
               object Label2: TLabel
-                Left = 58
-                Top = 30
+                Left = 51
+                Top = 29
                 Width = 38
                 Height = 16
                 Caption = 'Nome:'
@@ -368,7 +374,7 @@
                 Caption = 'Data Nascimento:'
               end
               object Label4: TLabel
-                Left = 19
+                Left = 12
                 Top = 59
                 Width = 77
                 Height = 16
@@ -389,7 +395,7 @@
                 Caption = 'Profiss'#227'o:'
               end
               object Label7: TLabel
-                Left = 36
+                Left = 29
                 Top = 87
                 Width = 60
                 Height = 16
@@ -409,42 +415,36 @@
                 Height = 16
                 Caption = 'Tipo Documento:'
               end
+              object Label49: TLabel
+                Left = 635
+                Top = 146
+                Width = 41
+                Height = 16
+                Caption = 'E-mail:'
+              end
               object cbTpDocumento: TComboBox
                 Left = 419
                 Top = 84
                 Width = 206
                 Height = 22
                 Style = csOwnerDrawFixed
-                TabOrder = 0
+                TabOrder = 7
               end
               object edtCodCidadeNatural: TEdit
-                Left = 102
+                Left = 96
                 Top = 56
                 Width = 54
                 Height = 24
                 NumbersOnly = True
-                TabOrder = 1
+                TabOrder = 2
+                OnChange = edtCodCidadeNaturalChange
               end
               object edtCpfCnpj: TEdit
-                Left = 102
+                Left = 96
                 Top = 84
                 Width = 195
                 Height = 24
-                TabOrder = 2
-              end
-              object edtDtNascimento: TDatePicker
-                Left = 984
-                Top = 27
-                Width = 181
-                Height = 24
-                Date = 44693.000000000000000000
-                DateFormat = 'dd/MM/yyyy'
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -16
-                Font.Name = 'Segoe UI'
-                Font.Style = []
-                TabOrder = 3
+                TabOrder = 6
               end
               object edtNmCidadeNatural: TEdit
                 Left = 162
@@ -452,7 +452,7 @@
                 Width = 463
                 Height = 24
                 Enabled = False
-                TabOrder = 4
+                TabOrder = 3
               end
               object edtNmMae: TEdit
                 Left = 682
@@ -460,44 +460,46 @@
                 Width = 483
                 Height = 24
                 CharCase = ecUpperCase
-                TabOrder = 5
+                TabOrder = 11
               end
               object edtNmPai: TEdit
-                Left = 102
+                Left = 95
                 Top = 112
                 Width = 459
                 Height = 24
                 CharCase = ecUpperCase
-                TabOrder = 6
+                TabOrder = 10
               end
               object edtNome: TEdit
-                Left = 102
-                Top = 27
+                Left = 95
+                Top = 26
                 Width = 749
                 Height = 24
                 CharCase = ecUpperCase
-                TabOrder = 7
+                TabOrder = 0
               end
               object edtOrgaoExpedidor: TEdit
                 Left = 984
                 Top = 84
                 Width = 181
                 Height = 24
-                TabOrder = 8
+                CharCase = ecUpperCase
+                TabOrder = 9
               end
               object edtProfissao: TEdit
                 Left = 984
                 Top = 56
                 Width = 181
                 Height = 24
-                TabOrder = 9
+                CharCase = ecUpperCase
+                TabOrder = 5
               end
               object edtRgIe: TEdit
                 Left = 682
                 Top = 84
                 Width = 121
                 Height = 24
-                TabOrder = 10
+                TabOrder = 8
               end
               object edtUfNatural: TEdit
                 Left = 682
@@ -506,7 +508,7 @@
                 Height = 24
                 CharCase = ecUpperCase
                 Enabled = False
-                TabOrder = 11
+                TabOrder = 4
               end
               object chkSabeAssinar: TCheckBox
                 Left = 37
@@ -516,34 +518,47 @@
                 Caption = 'Sabe Assinar'
                 TabOrder = 12
               end
+              object edtEmail: TEdit
+                Left = 682
+                Top = 143
+                Width = 483
+                Height = 24
+                TabOrder = 13
+                OnExit = edtEmailExit
+              end
+              object edtDtNascimento: TDateTimePicker
+                Left = 984
+                Top = 26
+                Width = 181
+                Height = 24
+                Date = 44694.000000000000000000
+                Time = 0.870951458331546700
+                TabOrder = 1
+              end
             end
           end
           object pnlObs: TPanel
             Left = 1
             Top = 434
-            Width = 1194
-            Height = 190
+            Width = 1183
+            Height = 208
             Align = alClient
             TabOrder = 2
-            ExplicitTop = 371
-            ExplicitHeight = 253
             object memoObs: TMemo
               Left = 1
-              Top = 87
-              Width = 1192
+              Top = 105
+              Width = 1181
               Height = 102
               Align = alBottom
               TabOrder = 0
-              ExplicitTop = 150
             end
             object pnlEndereco: TPanel
               Left = 1
               Top = 1
-              Width = 1192
-              Height = 86
+              Width = 1181
+              Height = 104
               Align = alClient
               TabOrder = 1
-              ExplicitHeight = 149
               object Label40: TLabel
                 Left = 4
                 Top = 24
@@ -566,7 +581,7 @@
                 Caption = 'Num:'
               end
               object Label43: TLabel
-                Left = 37
+                Left = 34
                 Top = 58
                 Width = 44
                 Height = 16
@@ -600,7 +615,7 @@
                 Width = 307
                 Height = 24
                 CharCase = ecUpperCase
-                TabOrder = 1
+                TabOrder = 2
               end
               object edtNumero: TEdit
                 Left = 464
@@ -608,29 +623,32 @@
                 Width = 73
                 Height = 24
                 CharCase = ecUpperCase
-                TabOrder = 2
+                TabOrder = 1
               end
               object edtCidadeEndereco: TEdit
-                Left = 87
+                Left = 82
                 Top = 55
                 Width = 52
                 Height = 24
                 NumbersOnly = True
                 TabOrder = 3
+                OnChange = edtCidadeEnderecoChange
               end
               object edtNmCidade: TEdit
-                Left = 145
+                Left = 141
                 Top = 55
                 Width = 272
                 Height = 24
+                Enabled = False
                 TabOrder = 4
               end
               object edtUf: TEdit
-                Left = 465
+                Left = 464
                 Top = 55
                 Width = 72
                 Height = 24
                 CharCase = ecUpperCase
+                Enabled = False
                 TabOrder = 5
               end
               object edtTelefones: TEdit
@@ -645,13 +663,13 @@
           end
           object pnlRodape: TPanel
             Left = 1
-            Top = 624
-            Width = 1194
+            Top = 642
+            Width = 1183
             Height = 65
             Align = alBottom
             TabOrder = 3
             DesignSize = (
-              1194
+              1183
               65)
             object Label25: TLabel
               Left = 5
@@ -680,107 +698,125 @@
               Caption = 'Respons'#225'vel:'
               ExplicitTop = 49
             end
-            object edtDataLocalidade: TDatePicker
-              Left = 417
-              Top = 28
-              Width = 159
-              Height = 24
-              Anchors = [akLeft]
-              Date = 44693.000000000000000000
-              DateFormat = 'dd/MM/yyyy'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -16
-              Font.Name = 'Segoe UI'
-              Font.Style = []
-              TabOrder = 0
-            end
             object edtLocalidade: TEdit
               Left = 76
               Top = 28
               Width = 274
               Height = 24
               Anchors = [akLeft]
-              TabOrder = 1
+              CharCase = ecUpperCase
+              TabOrder = 0
             end
-            object edtResponsável: TEdit
+            object edtResponsavel: TEdit
               Left = 672
               Top = 28
               Width = 318
               Height = 24
               Anchors = [akLeft]
+              CharCase = ecUpperCase
+              TabOrder = 1
+            end
+            object edtDataLocalidade: TDateTimePicker
+              Left = 411
+              Top = 28
+              Width = 172
+              Height = 24
+              Date = 44710.000000000000000000
+              Time = 0.712636111107713100
               TabOrder = 2
             end
           end
           object pnlObra: TPanel
             Left = 1
             Top = 20
-            Width = 1194
+            Width = 1183
             Height = 63
             Align = alTop
             TabOrder = 4
-            ExplicitLeft = 2
-            ExplicitTop = 15
             object GroupBox1: TGroupBox
               Left = 1
               Top = 1
-              Width = 1192
+              Width = 1181
               Height = 61
               Align = alClient
               TabOrder = 0
-              ExplicitLeft = 3
-              ExplicitTop = -3
               object Label46: TLabel
-                Left = 19
+                Left = 3
                 Top = 24
-                Width = 33
+                Width = 76
                 Height = 16
-                Caption = 'Obra:'
+                Caption = 'C'#243'digo Obra:'
               end
               object Label47: TLabel
-                Left = 201
+                Left = 372
                 Top = 24
                 Width = 29
                 Height = 16
                 Caption = 'SEQ:'
               end
               object Label48: TLabel
-                Left = 372
+                Left = 492
                 Top = 24
                 Width = 58
                 Height = 16
                 Caption = 'Municipio:'
               end
               object edtObra: TEdit
-                Left = 58
+                Left = 96
                 Top = 21
-                Width = 119
+                Width = 47
                 Height = 24
-                CharCase = ecUpperCase
+                NumbersOnly = True
                 TabOrder = 0
+                OnExit = edtObraExit
               end
               object edtSeqObra: TEdit
-                Left = 236
+                Left = 411
                 Top = 21
-                Width = 119
+                Width = 75
                 Height = 24
                 CharCase = ecUpperCase
                 TabOrder = 1
+                OnExit = edtSeqObraExit
               end
               object edtCodMunicipioObra: TEdit
-                Left = 436
+                Left = 556
                 Top = 21
                 Width = 53
                 Height = 24
                 NumbersOnly = True
                 TabOrder = 2
+                OnChange = edtCodMunicipioObraChange
+                OnExit = edtCodMunicipioObraExit
               end
               object edtNmMunicipioObra: TEdit
-                Left = 495
+                Left = 615
                 Top = 21
                 Width = 356
                 Height = 24
+                TabStop = False
+                Enabled = False
                 TabOrder = 3
+              end
+              object rgTpPessoa: TRadioGroup
+                Left = 980
+                Top = 5
+                Width = 185
+                Height = 47
+                Caption = 'Pessoa'
+                Columns = 2
+                Items.Strings = (
+                  'Fisica'
+                  'Juridica')
+                TabOrder = 4
+              end
+              object edtNmObra: TEdit
+                Left = 149
+                Top = 21
+                Width = 217
+                Height = 24
+                Enabled = False
+                TabOrder = 5
               end
             end
           end
@@ -792,20 +828,22 @@
         object pnlFundoConjuge: TPanel
           Left = 0
           Top = 0
-          Width = 1196
-          Height = 690
+          Width = 1185
+          Height = 708
           Align = alClient
           TabOrder = 0
           object gbConjuge: TGroupBox
             Left = 1
             Top = 1
-            Width = 1194
+            Width = 1183
             Height = 224
             Align = alTop
             BiDiMode = bdLeftToRight
             Caption = 'C'#244'njuge'
             ParentBiDiMode = False
             TabOrder = 0
+            ExplicitLeft = 0
+            ExplicitTop = 0
             object Label29: TLabel
               Left = 52
               Top = 26
@@ -822,63 +860,63 @@
             end
             object Label31: TLabel
               Left = 13
-              Top = 71
+              Top = 53
               Width = 65
               Height = 13
               Caption = 'Naturalidade:'
             end
             object Label32: TLabel
               Left = 650
-              Top = 71
+              Top = 53
               Width = 17
               Height = 13
               Caption = 'UF:'
             end
             object Label33: TLabel
               Left = 903
-              Top = 71
+              Top = 53
               Width = 48
               Height = 13
               Caption = 'Profiss'#227'o:'
             end
             object Label34: TLabel
               Left = 860
-              Top = 111
+              Top = 81
               Width = 85
               Height = 13
               Caption = 'Org'#227'o Expedidor:'
             end
             object Label35: TLabel
               Left = 633
-              Top = 111
+              Top = 81
               Width = 32
               Height = 13
               Caption = 'RG/IE:'
             end
             object Label36: TLabel
               Left = 309
-              Top = 111
+              Top = 81
               Width = 81
               Height = 13
               Caption = 'Tipo Documento:'
             end
             object Label37: TLabel
               Left = 30
-              Top = 111
+              Top = 81
               Width = 52
               Height = 13
               Caption = 'CPF/CNPJ:'
             end
             object Label38: TLabel
               Left = 31
-              Top = 147
+              Top = 108
               Width = 48
               Height = 13
               Caption = 'Nome Pai:'
             end
             object Label39: TLabel
               Left = 604
-              Top = 147
+              Top = 108
               Width = 54
               Height = 13
               Caption = 'Nome M'#227'e:'
@@ -890,99 +928,94 @@
               Height = 21
               TabOrder = 0
             end
-            object edtDtNascimentoConjuge: TDatePicker
-              Left = 978
-              Top = 23
-              Width = 181
-              Height = 24
-              Date = 44693.000000000000000000
-              DateFormat = 'dd/MM/yyyy'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -16
-              Font.Name = 'Segoe UI'
-              Font.Style = []
-              TabOrder = 1
-            end
             object edtCdCidadeNaturalidadeConjuge: TEdit
               Left = 96
-              Top = 68
+              Top = 50
               Width = 54
               Height = 21
-              TabOrder = 2
+              TabOrder = 1
             end
             object edtNmCidadeNaturalidadeConjuge: TEdit
               Left = 156
-              Top = 68
+              Top = 50
               Width = 463
+              Height = 21
+              Enabled = False
+              TabOrder = 2
+            end
+            object edtUfNaturalidadeConjuge: TEdit
+              Left = 673
+              Top = 50
+              Width = 73
               Height = 21
               Enabled = False
               TabOrder = 3
             end
-            object edtUfNaturalidadeConjuge: TEdit
-              Left = 673
-              Top = 68
-              Width = 73
-              Height = 21
-              Enabled = False
-              TabOrder = 4
-            end
             object edtProfissaoConjuge: TEdit
               Left = 978
-              Top = 68
+              Top = 50
+              Width = 181
+              Height = 21
+              TabOrder = 4
+            end
+            object edtOrgaoExpedidorConjuge: TEdit
+              Left = 978
+              Top = 78
               Width = 181
               Height = 21
               TabOrder = 5
             end
-            object edtOrgaoExpedidorConjuge: TEdit
-              Left = 978
-              Top = 108
-              Width = 181
+            object edtRgConjuge: TEdit
+              Left = 673
+              Top = 78
+              Width = 121
               Height = 21
               TabOrder = 6
             end
-            object edtRgConjuge: TEdit
-              Left = 676
-              Top = 108
-              Width = 121
-              Height = 21
-              TabOrder = 7
-            end
             object cbTipoDocumentoConjuge: TComboBox
               Left = 413
-              Top = 108
+              Top = 78
               Width = 206
               Height = 22
               Style = csOwnerDrawFixed
-              TabOrder = 8
+              TabOrder = 7
             end
             object edtCpfCnpjConjuge: TEdit
               Left = 96
-              Top = 108
+              Top = 78
               Width = 195
               Height = 21
-              TabOrder = 9
+              TabOrder = 8
             end
             object edtNmPaiConjuge: TEdit
               Left = 96
-              Top = 144
+              Top = 105
               Width = 459
               Height = 21
-              TabOrder = 10
+              TabOrder = 9
             end
             object edtNmMaeConjuge: TEdit
               Left = 676
-              Top = 147
+              Top = 108
               Width = 483
               Height = 21
-              TabOrder = 11
+              TabOrder = 10
             end
             object chkSabeAssinarConjuge: TCheckBox
               Left = 30
-              Top = 184
+              Top = 132
               Width = 97
               Height = 17
               Caption = 'Sabe Assinar'
+              TabOrder = 11
+            end
+            object edtDtNascimentoConjuge: TDateTimePicker
+              Left = 978
+              Top = 23
+              Width = 181
+              Height = 21
+              Date = 44710.000000000000000000
+              Time = 0.713382696761982500
               TabOrder = 12
             end
           end
@@ -994,9 +1027,9 @@
         object PageControl1: TPageControl
           Left = 0
           Top = 0
-          Width = 1196
-          Height = 690
-          ActivePage = tbsDocRegistrados
+          Width = 1185
+          Height = 708
+          ActivePage = tbsDocOcupantes
           Align = alClient
           TabOrder = 0
           object tbsDocRegistrados: TTabSheet

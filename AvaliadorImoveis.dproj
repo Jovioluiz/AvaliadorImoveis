@@ -85,7 +85,7 @@
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <DCC_ExeOutput>C:\Users\jovio\Desktop\Avaliação Imóveis\Executavel\</DCC_ExeOutput>
+        <DCC_ExeOutput>.\Executavel\</DCC_ExeOutput>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
@@ -116,6 +116,29 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="source\controller\types\uTypeFolhaCadastral.pas"/>
+        <DCCReference Include="source\controller\ObjetoRegra\uObjetoRegra.pas"/>
+        <DCCReference Include="source\model\Conexao\uDMConexao.pas">
+            <Form>dmConexao</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="source\model\Persistencia\uclFOLHA_CADASTRAL.pas"/>
+        <DCCReference Include="source\controller\Manipuladores\uManipuladorFolhaCadastral.pas"/>
+        <DCCReference Include="source\controller\ObjetoRegra\uRegra.pas"/>
+        <DCCReference Include="source\model\ControleDados\uDmFolhaCadastral.pas">
+            <Form>DmFolhaCadastral</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="source\Consulta\uConsultaSQL.pas"/>
+        <DCCReference Include="source\controller\ObjetoRegra\uObjetoRegraInterface.pas"/>
+        <DCCReference Include="source\uteis\uUtil.pas"/>
+        <DCCReference Include="source\model\Persistencia\uclFOLHA_CADASTRAL_ESTADO_CIVIL.pas"/>
+        <DCCReference Include="source\model\Persistencia\uPersistencia.pas"/>
+        <DCCReference Include="source\model\Persistencia\uclFOLHA_CADASTRAL_ESTADO_CIVIL_CERTIDOES.pas"/>
+        <DCCReference Include="source\model\Persistencia\uclFOLHA_CADASTRAL_ENDERECO.pas"/>
+        <DCCReference Include="source\model\Persistencia\uclFOLHA_CADASTRAL_CONJUGE.pas"/>
+        <DCCReference Include="source\model\Persistencia\uclFOLHA_CADASTRAL_DADOS_IMOVEL_DOCUMENTOS.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
