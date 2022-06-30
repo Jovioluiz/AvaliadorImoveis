@@ -16,16 +16,12 @@ object frmGenerico: TfrmGenerico
   OnKeyPress = FormKeyPress
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel1: TPanel
+  object pnlFundo1: TPanel
     Left = 0
     Top = 0
     Width = 650
     Height = 436
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = 256
-    ExplicitTop = 160
-    ExplicitWidth = 185
-    ExplicitHeight = 41
   end
 end

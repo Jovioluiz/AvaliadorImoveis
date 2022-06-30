@@ -20,7 +20,14 @@ uses
   uclFOLHA_CADASTRAL_ESTADO_CIVIL_CERTIDOES in 'source\model\Persistencia\uclFOLHA_CADASTRAL_ESTADO_CIVIL_CERTIDOES.pas',
   uclFOLHA_CADASTRAL_ENDERECO in 'source\model\Persistencia\uclFOLHA_CADASTRAL_ENDERECO.pas',
   uclFOLHA_CADASTRAL_CONJUGE in 'source\model\Persistencia\uclFOLHA_CADASTRAL_CONJUGE.pas',
-  uclFOLHA_CADASTRAL_DADOS_IMOVEL_DOCUMENTOS in 'source\model\Persistencia\uclFOLHA_CADASTRAL_DADOS_IMOVEL_DOCUMENTOS.pas';
+  uclFOLHA_CADASTRAL_DADOS_IMOVEL_DOCUMENTOS in 'source\model\Persistencia\uclFOLHA_CADASTRAL_DADOS_IMOVEL_DOCUMENTOS.pas',
+  fLevantamentoBenfeitoriasReprodutivas in 'source\view\Benfeitorias\fLevantamentoBenfeitoriasReprodutivas.pas' {frmBenfeitoriasReprodutivas},
+  uDmBenfeitorias in 'source\model\Benfeitorias\Dados\uDmBenfeitorias.pas' {dtmBenfeitorias: TDataModule},
+  uManipuladorBenfeitoriasReprodutivas in 'source\model\Benfeitorias\manipulador\uManipuladorBenfeitoriasReprodutivas.pas',
+  uManipuladorBenfeitorias in 'source\model\Benfeitorias\manipulador\uManipuladorBenfeitorias.pas',
+  fAvaliacaoTerras in 'source\view\Benfeitorias\fAvaliacaoTerras.pas' {frmAvaliacaoTerras},
+  uManipuladorAvaliacaoTerras in 'source\model\Benfeitorias\manipulador\uManipuladorAvaliacaoTerras.pas',
+  uDadosComum in 'source\model\Comum\uDadosComum.pas';
 
 {$R *.res}
 
@@ -30,5 +37,8 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TdmConexao, dmConexao);
+  Application.CreateForm(TfrmBenfeitoriasReprodutivas, frmBenfeitoriasReprodutivas);
+  Application.CreateForm(TdtmBenfeitorias, dtmBenfeitorias);
+  Application.CreateForm(TfrmAvaliacaoTerras, frmAvaliacaoTerras);
   Application.Run;
 end.

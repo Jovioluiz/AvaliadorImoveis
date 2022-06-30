@@ -8,7 +8,7 @@ uses
 
 type
   TfrmGenerico = class(TForm)
-    Panel1: TPanel;
+    pnlFundo1: TPanel;
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
   private

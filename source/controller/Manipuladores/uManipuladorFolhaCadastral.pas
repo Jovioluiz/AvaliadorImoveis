@@ -3,22 +3,27 @@ unit uManipuladorFolhaCadastral;
 interface
 
 uses
-  uRegra, uUtil;
+  uRegra, uUtil, uDmFolhaCadastral;
 
 type TManipuladorFolhaCadastral = class(TRegra)
   private
+    FDados: TDmFolhaCadastral;
     procedure GravaFolhaCadastralEstadoCivil(IdFolhaCadastral: Int64);
     procedure GravaFolhaCadastralEstadoCivilCertidoes(IdFolhaEstadoCivil: Int64);
     procedure GravaFolhaCadastralEndereco(IdFolhaCadastral: Int64);
     procedure CarregaFolhaCadastralDadosCivil(IdFolhaCadastral: Int64);
     procedure CarregaFolhaCadastralEndereco(IdFolhaCadastral: Int64);
     procedure GravaVinculoFolhaCadastralConjuge(IdFolhaCadastral: Int64);
+    procedure SetDados(const Value: TDmFolhaCadastral);
   public
+    constructor Create;
+    destructor Destroy; override;
     procedure GravaFolhaCadastral;
     function GetNomeCidade(CodCidade: Integer): string;
     function GetUF(CodCidade: Integer): string;
     function GetObra(CodObra: Integer): string;
-    function CarregaFolhaCadastral(CodObra: Integer; Sequencia: string): Boolean;
+    function CarregaFolhaCadastral(CodObra: Integer; const Sequencia: string): Boolean;
+    property Dados: TDmFolhaCadastral read FDados write SetDados;
 end;
 
 implementation
@@ -26,11 +31,11 @@ implementation
 uses
   uclFOLHA_CADASTRAL, uConsultaSQL, uclFOLHA_CADASTRAL_ESTADO_CIVIL,
   System.SysUtils, uclFOLHA_CADASTRAL_ESTADO_CIVIL_CERTIDOES, Data.DB,
-  uclFOLHA_CADASTRAL_ENDERECO, uclFOLHA_CADASTRAL_CONJUGE;
+  uclFOLHA_CADASTRAL_ENDERECO, uclFOLHA_CADASTRAL_CONJUGE, uDadosComum;
 
 { TManipuladorFolhaCadastral }
 
-function TManipuladorFolhaCadastral.CarregaFolhaCadastral(CodObra: Integer; Sequencia: string): Boolean;
+function TManipuladorFolhaCadastral.CarregaFolhaCadastral(CodObra: Integer; const Sequencia: string): Boolean;
 const
   SQL = ' SELECT ' +
         ' 	id_geral, ' +
@@ -230,69 +235,53 @@ begin
   end;
 end;
 
-function TManipuladorFolhaCadastral.GetNomeCidade(CodCidade: Integer): string;
-const
-  SQL = ' SELECT ' +
-        ' 	nm_cidade ' +
-        ' FROM ' +
-        ' 	cidade c ' +
-        ' WHERE ' +
-        ' 	cd_cidade = :cd_cidade ';
-var
-  consulta: TConsultaSQL;
+constructor TManipuladorFolhaCadastral.Create;
 begin
-  consulta := TConsultaSQL.Create(nil);
-  consulta.Connection := Conexao;
+  FDados := TDmFolhaCadastral.Create(nil);
+end;
+
+destructor TManipuladorFolhaCadastral.Destroy;
+begin
+  FDados.Free;
+  inherited;
+end;
+
+function TManipuladorFolhaCadastral.GetNomeCidade(CodCidade: Integer): string;
+var
+  dados: TDadosComum;
+begin
+  dados := TDadosComum.Create;
 
   try
-    consulta.Open(SQL, [CodCidade]);
-    Result := consulta.FieldByName('nm_cidade').AsString;
+    Result := dados.GetNomeCidade(CodCidade);
   finally
-    consulta.Free;
+    dados.Free;
   end;
 end;
 
 function TManipuladorFolhaCadastral.GetObra(CodObra: Integer): string;
-const
-  SQL = ' SELECT ' +
-        ' 	concat(sigla_obra, '' - '', nm_obra) AS nm_obra ' +
-        ' FROM ' +
-        ' 	obras ' +
-        ' WHERE ' +
-        ' 	cd_obra = :cd_obra ';
 var
-  consulta: TConsultaSQL;
+  dados: TDadosComum;
 begin
-  consulta := TConsultaSQL.Create(nil);
-  consulta.Connection := Conexao;
+  dados := TDadosComum.Create;
 
   try
-    consulta.Open(SQL, [CodObra]);
-    Result := consulta.FieldByName('nm_obra').AsString;
+    Result := dados.GetObra(CodObra);
   finally
-    consulta.Free;
+    dados.Free;
   end;
 end;
 
 function TManipuladorFolhaCadastral.GetUF(CodCidade: Integer): string;
-const
-  SQL = 'SELECT ' +
-        '	uf   ' +
-        'FROM  ' +
-        '	cidade c ' +
-        'WHERE ' +
-        '	cd_cidade = :cd_cidade ';
 var
-  consulta: TConsultaSQL;
+  dados: TDadosComum;
 begin
-  consulta := TConsultaSQL.Create(nil);
-  consulta.Connection := Conexao;
+  dados := TDadosComum.Create;
 
   try
-    consulta.Open(SQL, [CodCidade]);
-    Result := consulta.FieldByName('uf').AsString;
+    Result := dados.GetUF(CodCidade);
   finally
-    consulta.Free;
+    dados.Free;
   end;
 end;
 
@@ -427,6 +416,11 @@ begin
   finally
     persistencia.Free;
   end;
+end;
+
+procedure TManipuladorFolhaCadastral.SetDados(const Value: TDmFolhaCadastral);
+begin
+  FDados := Value;
 end;
 
 end.

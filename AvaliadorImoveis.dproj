@@ -139,6 +139,23 @@
         <DCCReference Include="source\model\Persistencia\uclFOLHA_CADASTRAL_ENDERECO.pas"/>
         <DCCReference Include="source\model\Persistencia\uclFOLHA_CADASTRAL_CONJUGE.pas"/>
         <DCCReference Include="source\model\Persistencia\uclFOLHA_CADASTRAL_DADOS_IMOVEL_DOCUMENTOS.pas"/>
+        <DCCReference Include="source\view\Benfeitorias\fLevantamentoBenfeitoriasReprodutivas.pas">
+            <Form>frmBenfeitoriasReprodutivas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="source\model\Benfeitorias\Dados\uDmBenfeitorias.pas">
+            <Form>dtmBenfeitorias</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="source\model\Benfeitorias\manipulador\uManipuladorBenfeitoriasReprodutivas.pas"/>
+        <DCCReference Include="source\model\Benfeitorias\manipulador\uManipuladorBenfeitorias.pas"/>
+        <DCCReference Include="source\view\Benfeitorias\fAvaliacaoTerras.pas">
+            <Form>frmAvaliacaoTerras</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="source\model\Benfeitorias\manipulador\uManipuladorAvaliacaoTerras.pas"/>
+        <DCCReference Include="source\model\Comum\uDadosComum.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

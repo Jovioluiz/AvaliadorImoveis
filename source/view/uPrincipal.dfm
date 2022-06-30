@@ -33,8 +33,15 @@ object frmPrincipal: TfrmPrincipal
         Caption = 'Cadastrar'
         OnClick = Cadastrar1Click
       end
-      object Visualizar1: TMenuItem
-        Caption = 'Visualizar'
+    end
+    object Benfeitorias1: TMenuItem
+      Caption = 'Benfeitorias'
+      object Reprodutivas1: TMenuItem
+        Caption = 'Reprodutivas'
+        OnClick = Reprodutivas1Click
+      end
+      object NoReprodutivas1: TMenuItem
+        Caption = 'N'#227'o Reprodutivas'
       end
     end
   end

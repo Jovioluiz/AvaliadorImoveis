@@ -11,9 +11,12 @@ type
     menuOpcoes: TMainMenu;
     FolhaCadastral1: TMenuItem;
     Cadastrar1: TMenuItem;
-    Visualizar1: TMenuItem;
     pnlFundo: TPanel;
+    Benfeitorias1: TMenuItem;
+    Reprodutivas1: TMenuItem;
+    NoReprodutivas1: TMenuItem;
     procedure Cadastrar1Click(Sender: TObject);
+    procedure Reprodutivas1Click(Sender: TObject);
   private
     procedure AbreFormulario(T: TFormClass; Form: TForm);
   public
@@ -26,7 +29,7 @@ var
 implementation
 
 uses
-  fFolhaCadastral;
+  fFolhaCadastral, fLevantamentoBenfeitoriasReprodutivas;
 
 {$R *.dfm}
 
@@ -43,6 +46,11 @@ end;
 procedure TfrmPrincipal.Cadastrar1Click(Sender: TObject);
 begin
   AbreFormulario(TfrmFolhaCadastral, frmFolhaCadastral);
+end;
+
+procedure TfrmPrincipal.Reprodutivas1Click(Sender: TObject);
+begin
+  AbreFormulario(TfrmBenfeitoriasReprodutivas, frmBenfeitoriasReprodutivas);
 end;
 
 end.

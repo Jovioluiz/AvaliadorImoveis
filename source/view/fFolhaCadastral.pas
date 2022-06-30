@@ -190,6 +190,8 @@ uses
 
 procedure TfrmFolhaCadastral.CarregaDados;
 begin
+//alterar para pesquisar pelo cod obra, sequencia
+//adicionar um grid que lista os beneficiarios e se der duplo clique abre a folha cadastral do beneficiario
   if FManipulador.CarregaFolhaCadastral(StrToInt(edtObra.Text), edtSeqObra.Text) then
     PreencheCampos;
 end;

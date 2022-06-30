@@ -842,8 +842,6 @@ object frmFolhaCadastral: TfrmFolhaCadastral
             Caption = 'C'#244'njuge'
             ParentBiDiMode = False
             TabOrder = 0
-            ExplicitLeft = 0
-            ExplicitTop = 0
             object Label29: TLabel
               Left = 52
               Top = 26
