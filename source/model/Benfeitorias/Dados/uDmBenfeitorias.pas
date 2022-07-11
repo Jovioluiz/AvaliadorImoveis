@@ -13,7 +13,6 @@ type
     cdsLFBenfeitorias: TClientDataSet;
     cdsLFBenfeitoriaReprodutivaid_geral: TLargeintField;
     cdsLFBenfeitoriaReprodutivaid_levantamento_fisico_benfeitorias: TLargeintField;
-    cdsLFBenfeitoriaReprodutivacd_benfeitoria: TIntegerField;
     cdsLFBenfeitoriaReprodutivaun_medida: TStringField;
     cdsLFBenfeitoriaReprodutivaquantidade: TFloatField;
     cdsLFBenfeitoriaReprodutivaidade: TFloatField;
@@ -27,6 +26,9 @@ type
     cdsClasseTerrafm: TFloatField;
     cdsClasseTerrafd: TFloatField;
     cdsClasseTerraarea_total: TFloatField;
+    cdsLFBenfeitoriaReprodutivapreco: TCurrencyField;
+    cdsLFBenfeitoriaReprodutivaid_benfeitoria: TIntegerField;
+    cdsLFBenfeitoriaReprodutivacd_benfeitoria: TStringField;
   private
     { Private declarations }
   public

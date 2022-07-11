@@ -9,14 +9,16 @@ object dtmBenfeitorias: TdtmBenfeitorias
   end
   object cdsLFBenfeitoriaReprodutiva: TClientDataSet
     PersistDataPacket.Data = {
-      EE0000009619E0BD010000001800000007000000000003000000EE000869645F
+      330100009619E0BD01000000180000000900000000000300000033010869645F
       676572616C08000100000000001F69645F6C6576616E74616D656E746F5F6669
       7369636F5F62656E666569746F0800010000000100094649454C444E414D4524
       00098069645F6C6576616E74616D656E746F5F66697369636F5F62656E666569
-      746F72696173000E63645F62656E666569746F72696104000100000000000975
-      6E5F6D65646964610100490000000100055749445448020002000A000A717561
-      6E746964616465080004000000000005696461646508000400000000000A7470
-      5F63756C7469766F04000100000000000000}
+      746F72696173000E63645F62656E666569746F72696101004900000001000557
+      49445448020002001E0009756E5F6D6564696461010049000000010005574944
+      5448020002000A000A7175616E74696461646508000400000000000569646164
+      6508000400000000000A74705F63756C7469766F040001000000000005707265
+      636F080004000000010007535542545950450200490006004D6F6E6579000E69
+      645F62656E666569746F72696104000100000000000000}
     Active = True
     Aggregates = <>
     FieldDefs = <
@@ -30,7 +32,8 @@ object dtmBenfeitorias: TdtmBenfeitorias
       end
       item
         Name = 'cd_benfeitoria'
-        DataType = ftInteger
+        DataType = ftString
+        Size = 30
       end
       item
         Name = 'un_medida'
@@ -48,6 +51,14 @@ object dtmBenfeitorias: TdtmBenfeitorias
       item
         Name = 'tp_cultivo'
         DataType = ftInteger
+      end
+      item
+        Name = 'preco'
+        DataType = ftCurrency
+      end
+      item
+        Name = 'id_benfeitoria'
+        DataType = ftInteger
       end>
     IndexDefs = <>
     Params = <>
@@ -61,10 +72,6 @@ object dtmBenfeitorias: TdtmBenfeitorias
     object cdsLFBenfeitoriaReprodutivaid_levantamento_fisico_benfeitorias: TLargeintField
       FieldName = 'id_levantamento_fisico_benfeitorias'
       Visible = False
-    end
-    object cdsLFBenfeitoriaReprodutivacd_benfeitoria: TIntegerField
-      DisplayLabel = 'C'#243'd. Benfeitoria'
-      FieldName = 'cd_benfeitoria'
     end
     object cdsLFBenfeitoriaReprodutivaun_medida: TStringField
       DisplayLabel = 'UN Medida'
@@ -82,6 +89,18 @@ object dtmBenfeitorias: TdtmBenfeitorias
     object cdsLFBenfeitoriaReprodutivatp_cultivo: TIntegerField
       DisplayLabel = 'Cultivo'
       FieldName = 'tp_cultivo'
+    end
+    object cdsLFBenfeitoriaReprodutivapreco: TCurrencyField
+      FieldName = 'preco'
+    end
+    object cdsLFBenfeitoriaReprodutivaid_benfeitoria: TIntegerField
+      FieldName = 'id_benfeitoria'
+      Visible = False
+    end
+    object cdsLFBenfeitoriaReprodutivacd_benfeitoria: TStringField
+      DisplayLabel = 'C'#243'd. Benfeitoria'
+      FieldName = 'cd_benfeitoria'
+      Size = 30
     end
   end
   object dsLFBenfeitorias: TDataSource

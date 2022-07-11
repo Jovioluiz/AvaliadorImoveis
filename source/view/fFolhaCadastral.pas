@@ -339,27 +339,13 @@ end;
 procedure TfrmFolhaCadastral.PreencheCamposCabecalho;
 begin
   edtCodMunicipioObra.Text := FManipulador.Dados.cdsFolhaCadastral.FieldByName('cd_municipio').AsInteger.ToString;
-  case AnsiIndexStr(UpperCase(FManipulador.Dados.cdsFolhaCadastral.FieldByName('tp_pessoa').AsString), ['F', 'J']) of
-    0:
-      rgTpPessoa.ItemIndex := 0;
-    1:
-      rgTpPessoa.ItemIndex := 1;
-  end;
+  rgTpPessoa.ItemIndex := AnsiIndexStr(UpperCase(FManipulador.Dados.cdsFolhaCadastral.FieldByName('tp_pessoa').AsString), ['F', 'J']);
   edtNome.Text := FManipulador.Dados.cdsFolhaCadastral.FieldByName('nome').AsString;
   edtDtNascimento.Date := FManipulador.Dados.cdsFolhaCadastral.FieldByName('dt_nascimento').AsDateTime;
   edtCodCidadeNatural.Text := FManipulador.Dados.cdsFolhaCadastral.FieldByName('cd_cidade_naturalidade').AsInteger.ToString;
   edtProfissao.Text := FManipulador.Dados.cdsFolhaCadastral.FieldByName('profissao').AsString;
   edtCpfCnpj.Text := FManipulador.Dados.cdsFolhaCadastral.FieldByName('cpf_cnpj').AsString;
-  case AnsiIndexStr(UpperCase(FManipulador.Dados.cdsFolhaCadastral.FieldByName('tp_documento').AsString), ['CI', 'CTPS', 'CP', 'IE']) of
-    0:
-      cbTpDocumento.ItemIndex := 0;
-    1:
-      cbTpDocumento.ItemIndex := 1;
-    2:
-      cbTpDocumento.ItemIndex := 2;
-    3:
-      cbTpDocumento.ItemIndex := 3;
-  end;
+  cbTpDocumento.ItemIndex := AnsiIndexStr(UpperCase(FManipulador.Dados.cdsFolhaCadastral.FieldByName('tp_documento').AsString), ['CI', 'CTPS', 'CP', 'IE']);
   edtRgIe.Text := FManipulador.Dados.cdsFolhaCadastral.FieldByName('ie_rg').AsString;
   chkSabeAssinar.Checked := FManipulador.Dados.cdsFolhaCadastral.FieldByName('sabe_assinar').AsBoolean;
   edtNmPai.Text := FManipulador.Dados.cdsFolhaCadastral.FieldByName('nome_pai').AsString;
@@ -638,7 +624,6 @@ end;
 function TfrmFolhaCadastral.ValidaCampos: Boolean;
 begin
   Result := True;
-
   if edtObra.IsEmpty then
     Exit(False);
   if edtSeqObra.IsEmpty then

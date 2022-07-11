@@ -3,11 +3,12 @@ unit uManipuladorFolhaCadastral;
 interface
 
 uses
-  uRegra, uUtil, uDmFolhaCadastral;
+  uRegra, uUtil, uDmFolhaCadastral, uDadosComum;
 
 type TManipuladorFolhaCadastral = class(TRegra)
   private
     FDados: TDmFolhaCadastral;
+    FDadosComum: TDadosComum;
     procedure GravaFolhaCadastralEstadoCivil(IdFolhaCadastral: Int64);
     procedure GravaFolhaCadastralEstadoCivilCertidoes(IdFolhaEstadoCivil: Int64);
     procedure GravaFolhaCadastralEndereco(IdFolhaCadastral: Int64);
@@ -24,6 +25,7 @@ type TManipuladorFolhaCadastral = class(TRegra)
     function GetObra(CodObra: Integer): string;
     function CarregaFolhaCadastral(CodObra: Integer; const Sequencia: string): Boolean;
     property Dados: TDmFolhaCadastral read FDados write SetDados;
+
 end;
 
 implementation
@@ -31,7 +33,7 @@ implementation
 uses
   uclFOLHA_CADASTRAL, uConsultaSQL, uclFOLHA_CADASTRAL_ESTADO_CIVIL,
   System.SysUtils, uclFOLHA_CADASTRAL_ESTADO_CIVIL_CERTIDOES, Data.DB,
-  uclFOLHA_CADASTRAL_ENDERECO, uclFOLHA_CADASTRAL_CONJUGE, uDadosComum;
+  uclFOLHA_CADASTRAL_ENDERECO, uclFOLHA_CADASTRAL_CONJUGE;
 
 { TManipuladorFolhaCadastral }
 
@@ -238,51 +240,29 @@ end;
 constructor TManipuladorFolhaCadastral.Create;
 begin
   FDados := TDmFolhaCadastral.Create(nil);
+  FDadosComum := TDadosComum.Create;
 end;
 
 destructor TManipuladorFolhaCadastral.Destroy;
 begin
   FDados.Free;
+  FDadosComum.Free;
   inherited;
 end;
 
 function TManipuladorFolhaCadastral.GetNomeCidade(CodCidade: Integer): string;
-var
-  dados: TDadosComum;
 begin
-  dados := TDadosComum.Create;
-
-  try
-    Result := dados.GetNomeCidade(CodCidade);
-  finally
-    dados.Free;
-  end;
+  Result := FDadosComum.GetNomeCidade(CodCidade);
 end;
 
 function TManipuladorFolhaCadastral.GetObra(CodObra: Integer): string;
-var
-  dados: TDadosComum;
 begin
-  dados := TDadosComum.Create;
-
-  try
-    Result := dados.GetObra(CodObra);
-  finally
-    dados.Free;
-  end;
+  Result := FDadosComum.GetObra(CodObra);
 end;
 
 function TManipuladorFolhaCadastral.GetUF(CodCidade: Integer): string;
-var
-  dados: TDadosComum;
 begin
-  dados := TDadosComum.Create;
-
-  try
-    Result := dados.GetUF(CodCidade);
-  finally
-    dados.Free;
-  end;
+  Result := FDadosComum.GetUF(CodCidade);
 end;
 
 procedure TManipuladorFolhaCadastral.GravaFolhaCadastral;

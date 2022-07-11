@@ -27,7 +27,11 @@ uses
   uManipuladorBenfeitorias in 'source\model\Benfeitorias\manipulador\uManipuladorBenfeitorias.pas',
   fAvaliacaoTerras in 'source\view\Benfeitorias\fAvaliacaoTerras.pas' {frmAvaliacaoTerras},
   uManipuladorAvaliacaoTerras in 'source\model\Benfeitorias\manipulador\uManipuladorAvaliacaoTerras.pas',
-  uDadosComum in 'source\model\Comum\uDadosComum.pas';
+  uDadosComum in 'source\model\Comum\uDadosComum.pas',
+  uInterfaceManipuladorBenfeitorias in 'source\model\Benfeitorias\Controller\uInterfaceManipuladorBenfeitorias.pas',
+  uMensagem in 'source\model\Comum\uMensagem.pas',
+  uclLEVANTAMENTO_FISICO_BENFEITORIAS in 'source\model\Persistencia\uclLEVANTAMENTO_FISICO_BENFEITORIAS.pas',
+  uclLEVANTAMENTO_FISICO_BENFEITORIAS_REPRODUTIVAS in 'source\model\Persistencia\uclLEVANTAMENTO_FISICO_BENFEITORIAS_REPRODUTIVAS.pas';
 
 {$R *.res}
 

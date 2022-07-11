@@ -2,27 +2,29 @@ inherited frmAvaliacaoTerras: TfrmAvaliacaoTerras
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Avalia'#231#227'o Terras'
-  ClientHeight = 446
+  ClientHeight = 439
   ClientWidth = 727
   Position = poScreenCenter
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
   ExplicitWidth = 733
+  ExplicitHeight = 468
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlFundo1: TPanel
     Width = 727
-    Height = 446
+    Height = 439
     ExplicitWidth = 727
     ExplicitHeight = 446
     object pnlBaixo: TPanel
       Left = 1
-      Top = 143
+      Top = 136
       Width = 725
       Height = 302
       Align = alBottom
       TabOrder = 0
+      ExplicitTop = 143
       object gbfh: TGroupBox
         Left = 1
         Top = 1
@@ -196,9 +198,10 @@ inherited frmAvaliacaoTerras: TfrmAvaliacaoTerras
       Left = 1
       Top = 1
       Width = 725
-      Height = 142
+      Height = 135
       Align = alClient
       TabOrder = 1
+      ExplicitHeight = 142
       object Label1: TLabel
         Left = 8
         Top = 61

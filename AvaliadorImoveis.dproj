@@ -156,6 +156,10 @@
         </DCCReference>
         <DCCReference Include="source\model\Benfeitorias\manipulador\uManipuladorAvaliacaoTerras.pas"/>
         <DCCReference Include="source\model\Comum\uDadosComum.pas"/>
+        <DCCReference Include="source\model\Benfeitorias\Controller\uInterfaceManipuladorBenfeitorias.pas"/>
+        <DCCReference Include="source\model\Comum\uMensagem.pas"/>
+        <DCCReference Include="source\model\Persistencia\uclLEVANTAMENTO_FISICO_BENFEITORIAS.pas"/>
+        <DCCReference Include="source\model\Persistencia\uclLEVANTAMENTO_FISICO_BENFEITORIAS_REPRODUTIVAS.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

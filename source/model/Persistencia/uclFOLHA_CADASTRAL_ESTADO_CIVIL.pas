@@ -27,7 +27,7 @@ type TFOLHA_CADASTRAL_ESTADO_CIVIL = class(TPersistencia)
     procedure Atualizar; override;
     procedure Excluir; override;
     procedure Persistir(Novo: Boolean); override;
-    function Buscar(NomeCampoFiltro, ValorCampoFiltro: string): Boolean;
+    function Buscar(const NomeCampoFiltro, ValorCampoFiltro: string): Boolean;
 
     property cd_estado_civil: Integer read Fcd_estado_civil write Setcd_estado_civil;
     property dt_atz: TDateTime read Fdt_atz write Setdt_atz;
@@ -173,7 +173,7 @@ begin
     Atualizar;
 end;
 
-function TFOLHA_CADASTRAL_ESTADO_CIVIL.Buscar(NomeCampoFiltro, ValorCampoFiltro: string): Boolean;
+function TFOLHA_CADASTRAL_ESTADO_CIVIL.Buscar(const NomeCampoFiltro, ValorCampoFiltro: string): Boolean;
 const
   SQL = 'select 1 from folha_cadastral_estado_civil ';
 var

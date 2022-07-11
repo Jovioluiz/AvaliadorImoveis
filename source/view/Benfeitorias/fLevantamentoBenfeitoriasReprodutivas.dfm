@@ -2,26 +2,28 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
   BorderStyle = bsDialog
   Caption = 'Benfeitorias Reprodutivas'
   ClientHeight = 813
-  ClientWidth = 976
+  ClientWidth = 962
   Position = poScreenCenter
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  ExplicitWidth = 982
+  ExplicitWidth = 968
   ExplicitHeight = 842
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlFundo1: TPanel
-    Width = 976
+    Width = 962
     Height = 813
     ExplicitWidth = 976
     ExplicitHeight = 813
     object gbCabecalho: TGroupBox
       Left = 1
       Top = 1
-      Width = 974
+      Width = 960
       Height = 105
       Align = alTop
       TabOrder = 0
+      OnExit = gbCabecalhoExit
+      ExplicitWidth = 974
       object Label1: TLabel
         Left = 9
         Top = 18
@@ -73,7 +75,7 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
         TabOrder = 0
       end
       object edtObra: TEdit
-        Left = 64
+        Left = 65
         Top = 15
         Width = 57
         Height = 21
@@ -88,27 +90,29 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
         TabOrder = 2
       end
       object edtNmProprietario: TEdit
-        Left = 127
+        Left = 191
         Top = 45
-        Width = 466
+        Width = 402
         Height = 21
+        CharCase = ecUpperCase
         Enabled = False
-        TabOrder = 3
+        TabOrder = 7
       end
       object edtBeneficiario: TEdit
-        Left = 127
+        Left = 191
         Top = 72
-        Width = 466
+        Width = 402
         Height = 21
         Enabled = False
-        TabOrder = 4
+        TabOrder = 8
       end
       object edtLocalizacao: TEdit
         Left = 792
         Top = 15
         Width = 153
         Height = 21
-        TabOrder = 5
+        CharCase = ecUpperCase
+        TabOrder = 3
       end
       object edtNrLaudo: TEdit
         Left = 688
@@ -117,30 +121,33 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
         Height = 21
         TabOrder = 6
       end
-      object edtCodProprietario: TEdit
+      object edtIdFCProprietario: TEdit
         Left = 65
         Top = 45
-        Width = 57
+        Width = 120
         Height = 21
-        TabOrder = 7
+        TabOrder = 4
+        OnExit = edtIdFCProprietarioExit
       end
-      object edtCodBeneficiario: TEdit
+      object edtIdFCBeneficiario: TEdit
         Left = 64
         Top = 72
-        Width = 57
+        Width = 121
         Height = 21
-        TabOrder = 8
-        OnExit = edtCodBeneficiarioExit
+        TabOrder = 5
+        OnChange = edtIdFCBeneficiarioChange
+        OnExit = edtIdFCBeneficiarioExit
       end
     end
     object grBenfeitorias: TGroupBox
       Left = 1
       Top = 106
-      Width = 974
+      Width = 960
       Height = 105
       Align = alTop
       Caption = 'Benfeitorias'
       TabOrder = 1
+      ExplicitWidth = 974
       object Label7: TLabel
         Left = 25
         Top = 29
@@ -163,7 +170,7 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
         Caption = 'Idade'
       end
       object Label10: TLabel
-        Left = 283
+        Left = 203
         Top = 65
         Width = 56
         Height = 13
@@ -176,12 +183,28 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
         Height = 13
         Caption = 'Quantidade'
       end
+      object Label13: TLabel
+        Left = 621
+        Top = 65
+        Width = 27
+        Height = 13
+        Caption = 'Pre'#231'o'
+      end
+      object Label14: TLabel
+        Left = 746
+        Top = 65
+        Width = 24
+        Height = 13
+        Caption = 'Total'
+      end
       object edtCodigoBenfeitoria: TEdit
         Left = 64
         Top = 26
         Width = 57
         Height = 21
         TabOrder = 0
+        OnChange = edtCodigoBenfeitoriaChange
+        OnExit = edtCodigoBenfeitoriaExit
       end
       object edtNmBenfeitoria: TEdit
         Left = 127
@@ -189,19 +212,19 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
         Width = 466
         Height = 21
         Enabled = False
-        TabOrder = 1
+        TabOrder = 7
       end
       object edtUnidade: TEdit
         Left = 654
         Top = 26
         Width = 68
         Height = 21
-        TabOrder = 2
+        TabOrder = 1
       end
       object rgTipoCultivo: TRadioGroup
-        Left = 346
+        Left = 262
         Top = 50
-        Width = 247
+        Width = 330
         Height = 40
         Margins.Left = 0
         Margins.Top = 0
@@ -223,7 +246,7 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
         ParentBiDiMode = False
         ParentDoubleBuffered = False
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 4
       end
       object edtQuantidade: TNumberBox
         Left = 808
@@ -231,7 +254,7 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
         Width = 137
         Height = 21
         Mode = nbmFloat
-        TabOrder = 4
+        TabOrder = 2
       end
       object btnAdicionar: TButton
         Left = 870
@@ -239,7 +262,7 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
         Width = 75
         Height = 25
         Caption = 'Adicionar'
-        TabOrder = 5
+        TabOrder = 6
         OnClick = btnAdicionarClick
       end
       object edtIdade: TNumberBox
@@ -248,22 +271,45 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
         Width = 121
         Height = 21
         Mode = nbmFloat
-        TabOrder = 6
+        TabOrder = 3
+      end
+      object edtPreco: TNumberBox
+        Left = 654
+        Top = 60
+        Width = 68
+        Height = 21
+        CurrencyFormat = 4
+        Decimal = 4
+        Mode = nbmCurrency
+        TabOrder = 5
+      end
+      object edtTotal: TNumberBox
+        Left = 778
+        Top = 60
+        Width = 74
+        Height = 21
+        CurrencyFormat = 4
+        Decimal = 4
+        Mode = nbmCurrency
+        ReadOnly = True
+        TabOrder = 8
       end
     end
     object gbGrid: TGroupBox
       Left = 1
       Top = 211
-      Width = 974
+      Width = 960
       Height = 272
       Align = alTop
       TabOrder = 2
+      ExplicitWidth = 974
       object gridBenfeitorias: TDBGrid
         Left = 2
         Top = 15
-        Width = 970
+        Width = 956
         Height = 255
         Align = alClient
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -276,15 +322,16 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
     object gbFatores: TGroupBox
       Left = 1
       Top = 483
-      Width = 974
+      Width = 960
       Height = 260
       Align = alTop
       Caption = 'Fatores de Homogeneiza'#231#227'o'
       TabOrder = 3
+      ExplicitWidth = 974
       object rgAcessibilidade: TRadioGroup
         Left = 2
         Top = 15
-        Width = 970
+        Width = 956
         Height = 59
         Align = alTop
         Caption = 'Acessibilidade'
@@ -296,14 +343,16 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
           'Regular'
           'Ruim')
         TabOrder = 0
+        ExplicitWidth = 970
       end
       object gbDistancia: TGroupBox
         Left = 2
         Top = 74
-        Width = 970
+        Width = 956
         Height = 103
         Align = alTop
         TabOrder = 1
+        ExplicitWidth = 970
         object Label12: TLabel
           Left = 7
           Top = 6
@@ -317,6 +366,7 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
           Width = 77
           Height = 21
           TabOrder = 0
+          OnChange = edtCentroConsumidorChange
         end
         object edtNmCentroConsumidor: TEdit
           Left = 391
@@ -343,15 +393,16 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
       object GroupBox1: TGroupBox
         Left = 2
         Top = 177
-        Width = 970
+        Width = 956
         Height = 105
         Align = alTop
         Caption = 'N'#237'vel de Manejo'
         TabOrder = 2
+        ExplicitWidth = 970
         object rgNivelManejo: TRadioGroup
           Left = 2
           Top = 15
-          Width = 966
+          Width = 952
           Height = 58
           Align = alTop
           Columns = 5
@@ -364,6 +415,7 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
             'Improdutivo')
           ParentDoubleBuffered = False
           TabOrder = 0
+          ExplicitWidth = 966
         end
       end
     end

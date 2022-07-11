@@ -353,3 +353,224 @@ ALTER TABLE public.folha_cadastral ADD CONSTRAINT folha_cadastral_fk FOREIGN KEY
 ALTER TABLE public.folha_cadastral_endereco ADD bairro varchar(100) NULL;
 ALTER TABLE folha_cadastral ADD COLUMN orgao_expedidor varchar(10) DEFAULT '';
 ALTER TABLE folha_cadastral ADD COLUMN folha_proprietario Bool;
+
+CREATE TABLE levantamento_fisico_benfeitorias(
+	id_geral int8 NOT NULL,
+	cd_obra int4 NOT NULL,
+    id_folha_cadastral_proprietario int8 NOT NULL,
+    id_folha_cadastral_beneficiario int8 NOT NULL,
+    sequencia varchar(10) NOT NULL,
+    localizacao varchar(10),
+    nr_laudo varchar(20),
+    dt_levantamento date,
+    acessibilidade int4,
+    cd_centro_consumidor int4,
+    distancia_centro_consumidor int4,
+    nivel_manejo int4,
+    dt_atz timestamp,
+    CONSTRAINT pk_levantamento_fisico_benfeitorias PRIMARY KEY (id_geral),
+    CONSTRAINT fk_levantamento_fisico_benfeitorias_obra FOREIGN KEY (cd_obra) REFERENCES obras(cd_obra) ON UPDATE CASCADE,
+    CONSTRAINT fk_levantamento_fisico_benfeitorias_cidade FOREIGN KEY (cd_centro_consumidor) REFERENCES cidade(cd_cidade) ON UPDATE CASCADE ON DELETE SET NULL,
+    CONSTRAINT fk_levantamento_fisico_benfeitorias_folha_cad FOREIGN KEY (id_folha_cadastral_proprietario) REFERENCES folha_cadastral (id_geral),
+    CONSTRAINT fk_levantamento_fisico_benfeitorias_folha_cad2 FOREIGN KEY (id_folha_cadastral_beneficiario) REFERENCES folha_cadastral (id_geral)
+);
+CREATE TRIGGER trg_levantamento_fisico_benfeitorias BEFORE
+INSERT
+    OR
+UPDATE
+    ON
+    public.levantamento_fisico_benfeitorias FOR EACH ROW EXECUTE FUNCTION func_grava_dt_atz();
+COMMENT ON COLUMN levantamento_fisico_benfeitorias.acessibilidade IS '0-Ótima; 1-Muito Boa; 2-Boa; 3-Regular; 4-Ruim';
+COMMENT ON COLUMN levantamento_fisico_benfeitorias.distancia_centro_consumidor IS '0-Muito Próximo(Até 5 KM); 1-Próximo (de 6 a 15 Km); 2-Distante (de 6 a 15 Km); 3-Muito Distante (acima de 30 Km)';
+COMMENT ON COLUMN levantamento_fisico_benfeitorias.nivel_manejo IS '0-Avançado; 1-Semi-Avançado; 2-Tradicional; 3-Primitivo; 4-Improdutivo';
+
+
+CREATE TABLE public.benfeitorias_reprodutivas (
+	id_benfeitoria int4 not NULL,
+	cd_benfeitoria varchar(100) NOT NULL,
+	nm_benfeitoria varchar(100) NOT NULL,
+	un_medida_padrao varchar(10) NOT NULL,
+	dt_atz timestamp NULL,
+	CONSTRAINT pk_benfeitorias_reprodutivas PRIMARY KEY (id_benfeitoria)
+);
+
+CREATE TRIGGER trg_benfeitorias_reprodutivas BEFORE
+INSERT
+    OR
+UPDATE
+    ON
+    public.benfeitorias_reprodutivas FOR EACH ROW EXECUTE FUNCTION func_grava_dt_atz();
+
+
+INSERT INTO benfeitorias_reprodutivas (id_benfeitoria, cd_benfeitoria, nm_benfeitoria, un_medida_padrao)
+VALUES (1,'1', 'Abacateiro', 'UN'),
+(2,'2', 'Abacaxizeiro','UN'),
+(3,'3', 'Açaizeiro','UN'),
+(4,'4', 'Acerola','UN'),
+(5,'5', 'Amoreira','UN'),
+(6,'6', 'Araçazeiro','UN'),
+(7,'7', 'Araticum','UN'),
+(8,'8', 'Bananeira','UN'),
+(9,'9', 'Cacaueiro','UN'),
+(10,'10', 'Cafeeiro','UN'),
+(11,'11', 'Cajueiro','UN'),
+(12,'12', 'Caramboleira','UN'),
+(13,'13', 'Cerejeira','UN'),
+(14,'14', 'Citricas','UN'),
+(15,'15', 'Coqueiro','UN'),
+(16,'16', 'Cupuaçu','UN'),
+(17,'17', 'Goiabeira','UN'),
+(18,'18', 'Grupo 1','UN'),
+(19,'19', 'Grupo 2','UN'),
+(20,'20', 'Grupo 3','UN'),
+(21,'21', 'Ingazeiro','UN'),
+(22,'22', 'Jaboticabeiro','UN'),
+(23,'23', 'Mamoeiro','UN'),
+(24,'24', 'Mangueira','UN'),
+(25,'25', 'Maracujazeiro','UN'),
+(26,'26', 'Pitombeira','UN'),
+(27,'27', 'Pupunheira','UN'),
+(28,'28', 'Tucumã/Jambo/Jamelão','UN'),
+(29,'29', 'Uxi','UN'),
+(30,'30', 'Videira','UN'),
+(31,'31', 'Cana-de-Açucar Tradicional','ha'),
+(32,'32', 'Cana-de-Açucar Tecnificada','ha'),
+(33,'33', 'Planta Ornamental Porte Baixo/Medio - Muda','UN'),
+(34,'34', 'Planta Ornamental Porte Baixo/Medio - Adulta','UN'),
+(35,'35', 'Planta Ornamental Porte Alto - Muda','UN'),
+(36,'36', 'Planta Ornamental Porte Alto - Adulta','UN'),
+(37,'37', 'Desmatamento Manual','ha'),
+(38,'38', 'Desmatamento Mecanizado','ha'),
+(39,'39', 'Capineira','ha'),
+(40,'40', 'Estrela Africana','ha'),
+(41,'41', 'Grama Jesuita','ha'),
+(42,'42', 'Capim Colonhão','ha'),
+(43,'43', 'Brachiaria','ha'),
+(44,'44', 'Quicuiu','ha'),
+(45,'45', 'Andropogon','ha'),
+(46,'46', 'Tanzania','ha'),
+(47,'47', 'Mombaça','ha'),
+(48,'48', 'Cedro/Louro - Beneficiamento','m3'),
+(49,'49', 'Pinheiro - Beneficiamento','m3'),
+(50,'50', 'Imbuia - Beneficiamento','m3'),
+(51,'51', 'Madeira de Lei - Beneficiamento','m3'),
+(52,'52', 'Madeira Branca - Beneficiamento','m3'),
+(53,'53', 'Lenha - Beneficiamento','m3'),
+(54,'54', 'Pinus - Beneficiamento','m3'),
+(55,'55', 'Eucalipto - Beneficiamento','m3'),
+(56,'56', 'Lenha Reflorestamento - Beneficiamento','m3'),
+(57,'57', 'Pinheiro Nativo','UN'),
+(58,'58', 'Pinheiro Reflorestamento','UN'),
+(59,'59', 'Madeira de Lei - Reflorestamento','UN'),
+(60,'60', 'Madeira Branca - Reflorestamento','UN'),
+(61,'61', 'Pinus - Reflorestamento','UN'),
+(62,'62', 'Eucalipto - Reflorestamento','UN');
+
+   
+CREATE TABLE tabela_preco(
+	cd_tabela int4 NOT NULL,
+	nm_tabela varchar(100) NOT NULL,
+	cd_obra int4 NOT NULL,
+	ativo bool,
+	dt_inicial date,
+	dt_final date,
+	dt_atz timestamp,
+	CONSTRAINT pk_tabela_preco PRIMARY KEY (cd_tabela),
+	CONSTRAINT fk_tabela_preco_obra FOREIGN KEY (cd_obra) REFERENCES obras (cd_obra)
+);
+
+CREATE TRIGGER trg_tabela_preco BEFORE
+INSERT
+    OR
+UPDATE
+    ON
+    public.tabela_preco FOR EACH ROW EXECUTE FUNCTION func_grava_dt_atz();
+
+CREATE TABLE tabela_preco_benfeitorias(
+	id_geral int8 NOT NULL,
+	cd_tabela int4 NOT NULL,
+	id_benfeitoria int4 NOT NULL,
+	preco NUMERIC(12,4) DEFAULT 0,
+	un_medida varchar(10),
+	dt_atz timestamp,
+	CONSTRAINT pk_tabela_preco_benfeitorias PRIMARY KEY (id_geral),
+	CONSTRAINT fk_tabela_preco_benfeitorias FOREIGN KEY (cd_tabela) REFERENCES tabela_preco (cd_tabela) ON DELETE CASCADE,
+	CONSTRAINT uk_tabela_preco_benfeitorias UNIQUE (cd_tabela, id_benfeitoria, un_medida)
+);
+ALTER TABLE public.tabela_preco_benfeitorias ADD CONSTRAINT tabela_preco_benfeitorias_fk FOREIGN KEY (id_benfeitoria) REFERENCES public.benfeitorias_reprodutivas(id_benfeitoria);
+
+CREATE TRIGGER trg_tabela_preco_benfeitorias BEFORE
+INSERT
+    OR
+UPDATE
+    ON
+    public.tabela_preco_benfeitorias FOR EACH ROW EXECUTE FUNCTION func_grava_dt_atz();
+
+CREATE TABLE levantamento_fisico_benfeitorias_reprodutivas(
+	id_geral int8 NOT NULL,
+	id_levantamento_fisico_benfeitorias int8 NOT NULL,
+	id_benfeitoria int4 NOT NULL,
+	un_medida varchar(10) NOT NULL,
+	quantidade numeric(12,4) NOT NULL,
+	idade numeric(8, 4) NOT NULL,
+	tp_cultivo int4 NOT NULL,
+	dt_atz timestamp,
+	CONSTRAINT pk_levantamento_fisico_benfeitorias_reprodutivas PRIMARY KEY (id_geral),
+	CONSTRAINT fk_levantamento_fisico_benfeitorias_reprodutivas_lf FOREIGN KEY (id_levantamento_fisico_benfeitorias) REFERENCES levantamento_fisico_benfeitorias(id_geral),
+	CONSTRAINT fk_levantamento_fisico_benfeitorias_reprodutivas_benf FOREIGN KEY (id_benfeitoria) REFERENCES benfeitorias_reprodutivas(id_benfeitoria)
+);
+
+CREATE TRIGGER trg_levantamento_fisico_benfeitorias_reprodutivas BEFORE
+INSERT
+    OR
+UPDATE
+    ON
+    public.levantamento_fisico_benfeitorias_reprodutivas FOR EACH ROW EXECUTE FUNCTION func_grava_dt_atz();
+COMMENT ON COLUMN levantamento_fisico_benfeitorias_reprodutivas.tp_cultivo IS '1-Nativo; 2-Tradicional; 3-Tecnificado';
+   
+CREATE TABLE avaliacao_terras(
+	id_geral int8 NOT NULL,
+	id_levantamento_fisico_benfeitorias int8 NOT NULL,
+	desc_objetivo_laudo varchar(100),
+	id_folha_cadastral_atribuido int4,
+	nr_laudo varchar(20),
+	fator_acessibilidade numeric(8,4),
+	fator_manejo numeric(8,4),
+	fator_distancia numeric(8,4),
+	fator_homogeinizacao numeric(8,4),
+	classe_solo varchar(5),
+	area_classe numeric(12,4),
+	area_total numeric(12,4),
+	dt_avaliacao date,
+	cd_usuario_avaliacao int4,
+	dt_atz timestamp,
+	CONSTRAINT pk_avaliacao_terras PRIMARY KEY (id_geral),
+	CONSTRAINT fk_avaliacao_terras_levantamento_fisico_benfeitorias FOREIGN KEY (id_levantamento_fisico_benfeitorias) REFERENCES levantamento_fisico_benfeitorias(id_geral),
+	CONSTRAINT fk_avaliacao_terras_folha_cadastral FOREIGN KEY (id_folha_cadastral_atribuido) REFERENCES folha_cadastral (id_geral)
+);
+
+CREATE TRIGGER trg_avaliacao_terras BEFORE
+INSERT
+    OR
+UPDATE
+    ON
+    public.avaliacao_terras FOR EACH ROW EXECUTE FUNCTION func_grava_dt_atz();
+	
+CREATE TABLE proprietarios_beneficiarios(
+	cd_proprietario int4 NOT NULL,
+	cd_beneficiario int4 NULL,
+	nome varchar(100),
+	id_folha_cadastral int8 NULL,
+	dt_atz timestamp,
+	CONSTRAINT pk_proprietarios_beneficiarios PRIMARY KEY (cd_proprietario),
+	CONSTRAINT fk_proprietarios_beneficiarios_folha_cadastral FOREIGN KEY (id_folha_cadastral) REFERENCES folha_cadastral (id_geral)
+);
+
+CREATE TRIGGER trg_proprietarios_beneficiarios BEFORE
+INSERT
+    OR
+UPDATE
+    ON
+    public.proprietarios_beneficiarios FOR EACH ROW EXECUTE FUNCTION func_grava_dt_atz();
+	
+ALTER TABLE public.levantamento_fisico_benfeitorias_reprodutivas ADD preco numeric(12, 4) DEFAULT 0;	

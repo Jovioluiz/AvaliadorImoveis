@@ -40,7 +40,7 @@ type TFOLHA_CADASTRAL_ESTADO_CIVIL_CERTIDOES = class(TPersistencia)
    //Metodo Pesquisar pela chave primaria
     function Pesquisar(id_geral: Int64): Boolean;  overload;
    //Metodo Pesquisar pelas unique
-    function Pesquisar(id_folha_cadastral_estado_civil: Int64; nr_certidao: String; folhas: String; livro: String): Boolean;  overload;
+    function Pesquisar(const id_folha_cadastral_estado_civil: Int64; const nr_certidao: String; const folhas: String; const livro: String): Boolean;  overload;
     procedure Inserir; override;
     procedure Atualizar; override;
     procedure Excluir; override;
@@ -234,7 +234,7 @@ begin
   end;
 end;
 
-function TFOLHA_CADASTRAL_ESTADO_CIVIL_CERTIDOES.Pesquisar(id_folha_cadastral_estado_civil: Int64; nr_certidao: String; folhas: String; livro: String): Boolean;
+function TFOLHA_CADASTRAL_ESTADO_CIVIL_CERTIDOES.Pesquisar(const id_folha_cadastral_estado_civil: Int64; const nr_certidao: String; const folhas: String; const livro: String): Boolean;
 const
     SQL = 
    'SELECT * ' +
