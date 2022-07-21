@@ -6,6 +6,7 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
   Position = poScreenCenter
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  ExplicitTop = -98
   ExplicitWidth = 968
   ExplicitHeight = 842
   PixelsPerInch = 96
@@ -13,7 +14,7 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
   inherited pnlFundo1: TPanel
     Width = 962
     Height = 813
-    ExplicitWidth = 976
+    ExplicitWidth = 962
     ExplicitHeight = 813
     object gbCabecalho: TGroupBox
       Left = 1
@@ -23,7 +24,6 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
       Align = alTop
       TabOrder = 0
       OnExit = gbCabecalhoExit
-      ExplicitWidth = 974
       object Label1: TLabel
         Left = 9
         Top = 18
@@ -147,7 +147,6 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
       Align = alTop
       Caption = 'Benfeitorias'
       TabOrder = 1
-      ExplicitWidth = 974
       object Label7: TLabel
         Left = 25
         Top = 29
@@ -279,7 +278,6 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
         Width = 68
         Height = 21
         CurrencyFormat = 4
-        Decimal = 4
         Mode = nbmCurrency
         TabOrder = 5
       end
@@ -289,7 +287,6 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
         Width = 74
         Height = 21
         CurrencyFormat = 4
-        Decimal = 4
         Mode = nbmCurrency
         ReadOnly = True
         TabOrder = 8
@@ -302,7 +299,6 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
       Height = 272
       Align = alTop
       TabOrder = 2
-      ExplicitWidth = 974
       object gridBenfeitorias: TDBGrid
         Left = 2
         Top = 15
@@ -327,7 +323,6 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
       Align = alTop
       Caption = 'Fatores de Homogeneiza'#231#227'o'
       TabOrder = 3
-      ExplicitWidth = 974
       object rgAcessibilidade: TRadioGroup
         Left = 2
         Top = 15
@@ -343,7 +338,8 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
           'Regular'
           'Ruim')
         TabOrder = 0
-        ExplicitWidth = 970
+        OnClick = rgAcessibilidadeClick
+        ExplicitLeft = 3
       end
       object gbDistancia: TGroupBox
         Left = 2
@@ -352,7 +348,6 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
         Height = 103
         Align = alTop
         TabOrder = 1
-        ExplicitWidth = 970
         object Label12: TLabel
           Left = 7
           Top = 6
@@ -388,6 +383,7 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
             'Distante (de 16 a 30 Km)'
             'Muito Distante (acima de 30 Km)')
           TabOrder = 2
+          OnClick = rgDistanciaCentroClick
         end
       end
       object GroupBox1: TGroupBox
@@ -398,7 +394,6 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
         Align = alTop
         Caption = 'N'#237'vel de Manejo'
         TabOrder = 2
-        ExplicitWidth = 970
         object rgNivelManejo: TRadioGroup
           Left = 2
           Top = 15
@@ -415,7 +410,7 @@ inherited frmBenfeitoriasReprodutivas: TfrmBenfeitoriasReprodutivas
             'Improdutivo')
           ParentDoubleBuffered = False
           TabOrder = 0
-          ExplicitWidth = 966
+          OnClick = rgNivelManejoClick
         end
       end
     end

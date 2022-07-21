@@ -71,6 +71,9 @@ type
     procedure edtIdFCBeneficiarioChange(Sender: TObject);
     procedure edtIdFCProprietarioExit(Sender: TObject);
     procedure edtCentroConsumidorChange(Sender: TObject);
+    procedure rgAcessibilidadeClick(Sender: TObject);
+    procedure rgDistanciaCentroClick(Sender: TObject);
+    procedure rgNivelManejoClick(Sender: TObject);
   private
     FManipuladorBenfeitorias: TManipuladorBenfeitoriasReprodutivas;
     procedure Adicionar;
@@ -80,6 +83,7 @@ type
     procedure PreencheCabecalho;
     procedure GravarCabecalho;
     function GetNomeCidade(CodCidade: Integer): string;
+    procedure CarregaInfFatoresHomogeinizacao;
   public
     procedure Salvar; override;
     procedure Excluir; override;
@@ -167,6 +171,7 @@ begin
   param.sequencia := edtSequencia.Text;
   param.localizacao := edtLocalizacao.Text;
   FManipuladorBenfeitorias.CarregaLevantamento(param);
+  CarregaInfFatoresHomogeinizacao;
 end;
 
 procedure TfrmBenfeitoriasReprodutivas.edtIdFCProprietarioExit(Sender: TObject);
@@ -226,7 +231,7 @@ begin
   if edtObra.IsEmpty then
     Exit;
 
-  dados := TDadosComum.Create;
+  dados := TDadosComum.Create(nil);
   try
     edtNmObra.Text := dados.GetObra(StrToInt(edtObra.Text));
   finally
@@ -265,7 +270,7 @@ function TfrmBenfeitoriasReprodutivas.GetNomeCidade(CodCidade: Integer): string;
 var
   cidade: TDadosComum;
 begin
-  cidade := TDadosComum.Create;
+  cidade := TDadosComum.Create(nil);
 
   try
     Result := cidade.GetNomeCidade(CodCidade);
@@ -293,6 +298,36 @@ begin
   edtIdade.ValueFloat := 0;
   rgTipoCultivo.ItemIndex := 0;
   edtCodigoBenfeitoria.SetFocus;
+end;
+
+procedure TfrmBenfeitoriasReprodutivas.CarregaInfFatoresHomogeinizacao;
+begin
+  edtNrLaudo.Text := FManipuladorBenfeitorias.Dados.cdsLFBenfeitorias.FieldByName('nr_laudo').AsString;
+  case FManipuladorBenfeitorias.Dados.cdsLFBenfeitorias.FieldByName('acessibilidade').AsInteger of
+    -1: rgAcessibilidade.ItemIndex := Ord(taNenhum);
+    0: rgAcessibilidade.ItemIndex := Ord(taOtima);
+    1: rgAcessibilidade.ItemIndex := Ord(taMuitoBoa);
+    2: rgAcessibilidade.ItemIndex := Ord(taBoa);
+    3: rgAcessibilidade.ItemIndex := Ord(taRegular);
+    4: rgAcessibilidade.ItemIndex := Ord(taRuim);
+  end;
+
+  case FManipuladorBenfeitorias.Dados.cdsLFBenfeitorias.FieldByName('distancia_centro_consumidor').AsInteger of
+    -1: rgDistanciaCentro.ItemIndex := Ord(tdNenhum);
+    0: rgDistanciaCentro.ItemIndex := Ord(tdMuitoProximo);
+    1: rgDistanciaCentro.ItemIndex := Ord(tdProximo);
+    2: rgDistanciaCentro.ItemIndex := Ord(tdDistante);
+    3: rgDistanciaCentro.ItemIndex := Ord(tdMuitoDistante);
+  end;
+
+  case FManipuladorBenfeitorias.Dados.cdsLFBenfeitorias.FieldByName('nivel_manejo').AsInteger of
+    -1: rgNivelManejo.ItemIndex := Ord(tnmNenhum);
+    0: rgNivelManejo.ItemIndex := Ord(tnmAvancado);
+    1: rgNivelManejo.ItemIndex := Ord(tnmSemiAvancado);
+    2: rgNivelManejo.ItemIndex := Ord(tnmTradicional);
+    3: rgNivelManejo.ItemIndex := Ord(tnmPrimitivo);
+    4: rgNivelManejo.ItemIndex := Ord(tnmImprodutivo);
+  end;
 end;
 
 procedure TfrmBenfeitoriasReprodutivas.PreencheCabecalho;
@@ -341,11 +376,36 @@ begin
   FManipuladorBenfeitorias.CarregaDataSetCabecalho(param);
 end;
 
+procedure TfrmBenfeitoriasReprodutivas.rgAcessibilidadeClick(Sender: TObject);
+begin
+  inherited;
+  FManipuladorBenfeitorias.Dados.cdsLFBenfeitorias.Edit;
+  FManipuladorBenfeitorias.Dados.cdsLFBenfeitorias.FieldByName('acessibilidade').AsInteger := Ord(rgAcessibilidade.ItemIndex);
+  FManipuladorBenfeitorias.Dados.cdsLFBenfeitorias.Post;
+end;
+
+procedure TfrmBenfeitoriasReprodutivas.rgDistanciaCentroClick(Sender: TObject);
+begin
+  inherited;
+  FManipuladorBenfeitorias.Dados.cdsLFBenfeitorias.Edit;
+  FManipuladorBenfeitorias.Dados.cdsLFBenfeitorias.FieldByName('distancia_centro_consumidor').AsInteger := Ord(rgDistanciaCentro.ItemIndex);
+  FManipuladorBenfeitorias.Dados.cdsLFBenfeitorias.Post;
+end;
+
+procedure TfrmBenfeitoriasReprodutivas.rgNivelManejoClick(Sender: TObject);
+begin
+  inherited;
+  FManipuladorBenfeitorias.Dados.cdsLFBenfeitorias.Edit;
+  FManipuladorBenfeitorias.Dados.cdsLFBenfeitorias.FieldByName('nivel_manejo').AsInteger := Ord(rgNivelManejo.ItemIndex);
+  FManipuladorBenfeitorias.Dados.cdsLFBenfeitorias.Post;
+end;
+
 procedure TfrmBenfeitoriasReprodutivas.Salvar;
 begin
   inherited;
   FManipuladorBenfeitorias.GravarCabecalho;
   FManipuladorBenfeitorias.GravarBenfeitorias;
+//  FManipuladorBenfeitorias.Conexao.Commit;
 end;
 
 procedure TfrmBenfeitoriasReprodutivas.ValidaCampos;

@@ -41,8 +41,5 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TdmConexao, dmConexao);
-  Application.CreateForm(TfrmBenfeitoriasReprodutivas, frmBenfeitoriasReprodutivas);
-  Application.CreateForm(TdtmBenfeitorias, dtmBenfeitorias);
-  Application.CreateForm(TfrmAvaliacaoTerras, frmAvaliacaoTerras);
   Application.Run;
 end.

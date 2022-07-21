@@ -9,7 +9,7 @@ type
   TConsultaSQL = class (TFDQuery)
   public
     constructor Create(Owner: TComponent); overload; override;
-    constructor Create(Conexao: TFDconnection); reintroduce; overload;
+    constructor Create(const Conexao: TFDconnection; const SQL: string = ''); reintroduce; overload;
     destructor Destroy; override;
   end;
 
@@ -22,10 +22,11 @@ begin
   inherited Create(Owner);
 end;
 
-constructor TConsultaSQL.Create(Conexao: TFDconnection);
+constructor TConsultaSQL.Create(const Conexao: TFDconnection; const SQL: string = '');
 begin
   Create(Owner);
   Self.Connection := Conexao;
+  Self.SQL.Text := SQL;
 end;
 
 destructor TConsultaSQL.Destroy;

@@ -17,7 +17,7 @@ type TManipuladorFolhaCadastral = class(TRegra)
     procedure GravaVinculoFolhaCadastralConjuge(IdFolhaCadastral: Int64);
     procedure SetDados(const Value: TDmFolhaCadastral);
   public
-    constructor Create;
+    constructor Create; reintroduce;
     destructor Destroy; override;
     procedure GravaFolhaCadastral;
     function GetNomeCidade(CodCidade: Integer): string;
@@ -240,7 +240,7 @@ end;
 constructor TManipuladorFolhaCadastral.Create;
 begin
   FDados := TDmFolhaCadastral.Create(nil);
-  FDadosComum := TDadosComum.Create;
+  FDadosComum := TDadosComum.Create(nil);
 end;
 
 destructor TManipuladorFolhaCadastral.Destroy;

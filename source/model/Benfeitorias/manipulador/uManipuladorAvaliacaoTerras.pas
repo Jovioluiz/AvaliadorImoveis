@@ -10,7 +10,7 @@ type
   private
     FDados: TdtmBenfeitorias;
   public
-    constructor Create;
+    constructor Create; reintroduce;
     destructor Destroy; override;
     property Dados: TdtmBenfeitorias read FDados write FDados;
 

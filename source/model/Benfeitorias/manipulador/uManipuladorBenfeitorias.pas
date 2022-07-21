@@ -44,7 +44,7 @@ TParametrosLevantamento = record
     function GetNomeBenfeitoria(CodBenfeitoria: string): string; virtual; abstract;
     procedure GravarBenfeitorias; virtual; abstract;
     procedure CarregaDataSetCabecalho(Parametros: TParametrosLevantamento);
-    constructor Create;
+    constructor Create; reintroduce;
     destructor Destroy; override;
 
     property Dados: TdtmBenfeitorias read FDados write SetDados;

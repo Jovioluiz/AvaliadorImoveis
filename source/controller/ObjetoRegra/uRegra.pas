@@ -3,7 +3,7 @@ unit uRegra;
 interface
 
 uses
-  uObjetoRegra, uDmFolhaCadastral;
+  uObjetoRegra, uDmFolhaCadastral, FireDAC.Comp.Client;
 
 type
   TRegra = class(TObjetoRegra)
@@ -11,7 +11,7 @@ type
     FIdFolhaCadastral: Int64;
     procedure SetIdFolhaCadastral(const Value: Int64);
   public
-    constructor Create;
+    constructor Create(ConexaoBanco: TFDConnection); override;
     destructor Destroy; override;
     property IdFolhaCadastral: Int64 read FIdFolhaCadastral write SetIdFolhaCadastral;
 end;
@@ -20,8 +20,9 @@ implementation
 
 { TRegra }
 
-constructor TRegra.Create;
+constructor TRegra.Create(ConexaoBanco: TFDConnection);
 begin
+  inherited Create(ConexaoBanco);
   FIdFolhaCadastral := 0;
 end;
 

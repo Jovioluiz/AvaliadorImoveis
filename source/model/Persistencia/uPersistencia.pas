@@ -10,8 +10,7 @@ type
     private
 //      FConexaoBanco: TFDConnection;
     public
-      constructor Create; overload;
-      constructor Create(ConexaoBanco: TFDConnection); overload;
+      constructor Create(ConexaoBanco: TFDConnection); override;
       procedure Inserir; virtual; abstract;
       procedure Atualizar; virtual; abstract;
       procedure Excluir; virtual; abstract;
@@ -24,17 +23,16 @@ type
 
 implementation
 
-{ TPersistencia }
+uses
+  uConsultaSQL;
 
-constructor TPersistencia.Create;
-begin
-  inherited;
-end;
+{ TPersistencia }
 
 constructor TPersistencia.Create(ConexaoBanco: TFDConnection);
 begin
-  if Assigned(ConexaoBanco) then
-    Conexao := ConexaoBanco;
+  inherited Create(ConexaoBanco);
+//  if Assigned(ConexaoBanco) then
+//    Conexao := ConexaoBanco;
 end;
 
 destructor TPersistencia.Destroy;
@@ -46,15 +44,14 @@ function TPersistencia.GetIdGeral: Int64;
 const
   SQL = 'select ' +
         '* '+
-        'from func_id_geral();' ;
+        'from func_id_geral()';
 var
-  qry: TFDQuery;
+  qry: TConsultaSQL;
 begin
-  qry := TFDQuery.Create(nil);
-  qry.Connection := Conexao;
+  qry := TConsultaSQL.Create(Conexao, SQL);
 
   try
-    qry.Open(SQL);
+    qry.Open();
     Result := qry.FieldByName('func_id_geral').AsLargeInt;
   finally
     qry.Free;
